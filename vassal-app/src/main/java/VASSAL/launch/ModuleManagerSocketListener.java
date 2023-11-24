@@ -16,6 +16,7 @@
  */
 package VASSAL.launch;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -59,6 +60,7 @@ public final class ModuleManagerSocketListener implements Runnable {
           try (ObjectInputStream in = new ObjectInputStream(
             new BufferedInputStream(clientSocket.getInputStream()))) {
 
+            ObjectInputFilters.enableObjectFilterIfUnprotected(in);
             message = execute.apply(in.readObject());
           }
           clientSocket.close();
