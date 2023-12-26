@@ -17,6 +17,7 @@
  */
 package VASSAL.tools.icon;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -314,7 +315,7 @@ public final class IconFactory {
          BufferedReader br = new BufferedReader(isr)) {
       String imageName = ""; //$NON-NLS-1$
       while (imageName != null) {
-        imageName = br.readLine();
+        imageName = BoundedLineReader.readLine(br, 5_000_000);
         if (imageName != null) {
           final String familyName = imageName.split("\\.")[0]; //$NON-NLS-1$
           IconFamily family = iconFamilies.get(familyName);
@@ -344,7 +345,7 @@ public final class IconFactory {
          BufferedReader br = new BufferedReader(isr)) {
       String imageName = ""; //$NON-NLS-1$
       while (imageName != null) {
-        imageName = br.readLine();
+        imageName = BoundedLineReader.readLine(br, 5_000_000);
         if (imageName != null) {
           final String familyName = imageName.split("\\.")[0]; //$NON-NLS-1$
           IconFamily family = iconFamilies.get(familyName);

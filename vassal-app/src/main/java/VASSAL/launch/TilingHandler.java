@@ -35,6 +35,7 @@ import VASSAL.tools.lang.Pair;
 import VASSAL.tools.swing.EDT;
 import VASSAL.tools.swing.ProgressDialog;
 import VASSAL.tools.swing.Progressor;
+import io.github.pixee.security.BoundedLineReader;
 
 import org.apache.commons.io.FileUtils;
 
@@ -356,7 +357,7 @@ public class TilingHandler {
       // Nothing should do this in 2022. What a piece of shit.
       String line;
       while (true) {
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
         if (line == null) {
           throw new IOException("EOF before tiler started");
         }
@@ -387,7 +388,7 @@ public class TilingHandler {
       boolean done = false;
       char type;
       while (!done && !proc.future.isCancelled()) {
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
         if (line == null) {
           throw new IOException("EOF before tiler finished");
         }
