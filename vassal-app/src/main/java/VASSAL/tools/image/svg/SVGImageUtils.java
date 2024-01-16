@@ -18,6 +18,8 @@
 
 package VASSAL.tools.image.svg;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.awt.Dimension;
 import java.awt.geom.AffineTransform;
 import java.io.File;
@@ -306,7 +308,7 @@ public class SVGImageUtils {
   protected static List<String> getExternalReferences(
                           String path, List<String> known) throws IOException {
 
-    final URL here = new URL("file", null, new File(path).getCanonicalPath());
+    final URL here = Urls.create("file", null, new File(path).getCanonicalPath(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 
     Document doc = null;
     try {
@@ -322,8 +324,7 @@ public class SVGImageUtils {
     final NodeList usenodes = doc.getElementsByTagName("use"); //NON-NLS
     for (int i = 0; i < usenodes.getLength(); ++i) {
       final Element e = (Element) usenodes.item(i);
-      final URL url = new URL(new URL(e.getBaseURI()),
-                              XLinkSupport.getXLinkHref(e));
+      final URL url = Urls.create(Urls.create(e.getBaseURI(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), XLinkSupport.getXLinkHref(e), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
       // balk (for now) unless file is available on our filesystem
       if (url.getProtocol().equals("file")) { //NON-NLS
         final String refpath = url.getPath();
@@ -359,7 +360,7 @@ public class SVGImageUtils {
       XMLResourceDescriptor.getXMLParserClassName()
     );
 
-    final URL here = new URL("file", null, new File(path).getCanonicalPath());
+    final URL here = Urls.create("file", null, new File(path).getCanonicalPath(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
     final StringWriter sw = new StringWriter();
 
     try {
@@ -387,8 +388,7 @@ public class SVGImageUtils {
     // relativize the xlink:href attribute if there is one
     if (e.hasAttributeNS(XLinkSupport.XLINK_NAMESPACE_URI, "href")) { //NON-NLS
       try {
-        final URL url = new URL(new URL(e.getBaseURI()),
-                                XLinkSupport.getXLinkHref(e));
+        final URL url = Urls.create(Urls.create(e.getBaseURI(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), XLinkSupport.getXLinkHref(e), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         final String anchor = url.getRef();
         final String name = new File(url.getPath()).getName();
         XLinkSupport.setXLinkHref(e, name + '#' + anchor);

@@ -17,6 +17,8 @@
  */
 package VASSAL.tools.icon;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -273,7 +275,7 @@ public final class IconFactory {
       // so look for an Icon we know must exist there.
       // imageUrl = jar.getURL(DataArchive.IMAGE_DIR
       imageUrl = jar.getURL(DataArchive.IMAGE_DIR + ApplicationIcons.VASSAL_ICON_LARGE);
-      imageUrl = new URL(imageUrl.toString().substring(0, imageUrl.toString().length() - ApplicationIcons.VASSAL_ICON_LARGE.length()));
+      imageUrl = Urls.create(imageUrl.toString().substring(0, imageUrl.toString().length() - ApplicationIcons.VASSAL_ICON_LARGE.length()), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 
       logger.debug("VASSAL images folder found at " + imageUrl); //NON-NLS
 
