@@ -959,7 +959,8 @@ System.out.println("experiment: creating class manager");
 	{
 		// Try object imports
 		if ( importedObjects != null )
-		for(int i=0; i<importedObjects.size(); i++)
+		{
+		    for(int i=0; i<importedObjects.size(); i++)
 		{
 			Object object = importedObjects.elementAt(i);
 			Class clas = object.getClass();
@@ -968,16 +969,19 @@ System.out.println("experiment: creating class manager");
 			if ( method != null )
 				return new BshMethod( method, object );
 		}
+		}
 
 		// Try static imports
 		if ( importedStatic!= null )
-		for(int i=0; i<importedStatic.size(); i++)
+		{
+		    for(int i=0; i<importedStatic.size(); i++)
 		{
 			Class clas = (Class)importedStatic.elementAt(i);
 			Method method = Reflect.resolveJavaMethod( 
 				getClassManager(), clas, name, sig, true/*onlyStatic*/ );
 			if ( method != null )
 				return new BshMethod( method, null/*object*/ );
+		}
 		}
 
 		return null;
@@ -988,7 +992,8 @@ System.out.println("experiment: creating class manager");
 	{
 		// Try object imports
 		if ( importedObjects != null )
-		for(int i=0; i<importedObjects.size(); i++)
+		{
+		    for(int i=0; i<importedObjects.size(); i++)
 		{
 			Object object = importedObjects.elementAt(i);
 			Class clas = object.getClass();
@@ -998,16 +1003,19 @@ System.out.println("experiment: creating class manager");
 				return new Variable( 
 					name, field.getType(), new LHS( object, field ) );
 		}
+		}
 
 		// Try static imports
 		if ( importedStatic!= null )
-		for(int i=0; i<importedStatic.size(); i++)
+		{
+		    for(int i=0; i<importedStatic.size(); i++)
 		{
 			Class clas = (Class)importedStatic.elementAt(i);
 			Field field = Reflect.resolveJavaField( 
 				clas, name, true/*onlyStatic*/ );
 			if ( field != null )
 				return new Variable( name, field.getType(), new LHS( field ) );
+		}
 		}
 
 		return null;
@@ -1481,7 +1489,9 @@ System.out.println("experiment: creating class manager");
 		importedCommands = null;
 		importedObjects = null;
 		if ( parent == null )
-			loadDefaultImports();	
+			{
+			    loadDefaultImports();
+			}	
     	classCache = null;
 		names = null;
 	}

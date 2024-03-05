@@ -351,7 +351,9 @@ public class Interpreter
 				bshArgs = new String [ args.length -1 ];
 				System.arraycopy( args, 1, bshArgs, 0, args.length-1 );
 			} else
-				bshArgs = new String [0];
+				{
+				    bshArgs = new String [0];
+				}
 
             Interpreter interpreter = new Interpreter();
 			//System.out.println("run i = "+interpreter);
@@ -397,7 +399,9 @@ public class Interpreter
 				};
 			}
 			else
-				src = System.in;
+				{
+				    src = System.in;
+				}
 
             Reader in = new CommandLineReader( new InputStreamReader(src));
             Interpreter interpreter = 
@@ -466,8 +470,10 @@ public class Interpreter
 				
 					// sanity check during development
 					if ( callstack.depth() > 1 )
-						throw new InterpreterError(
+						{
+						    throw new InterpreterError(
 							"Callstack growing: "+callstack);
+						}
 
                     if(ret instanceof ReturnControl)
                         ret = ((ReturnControl)ret).value;
@@ -501,7 +507,9 @@ public class Interpreter
             {
                 error("// Uncaught Exception: " + e );
 				if ( e.inNativeCode() )
-					e.printStackTrace( DEBUG, err );
+					{
+					    e.printStackTrace( DEBUG, err );
+					}
                 if(!interactive)
                     eof = true;
 				setu("$_e", e.getTarget());
@@ -509,9 +517,13 @@ public class Interpreter
             catch (EvalError e)
             {
 				if ( interactive )
-					error( "EvalError: "+e.toString() );
+					{
+					    error( "EvalError: "+e.toString() );
+					}
 				else
-					error( "EvalError: "+e.getMessage() );
+					{
+					    error( "EvalError: "+e.getMessage() );
+					}
 
                 if(DEBUG)
                     e.printStackTrace();
@@ -640,14 +652,18 @@ public class Interpreter
 					node.setSourceFile( sourceFileInfo );
 
 					if ( TRACE )
-						println( "// " +node.getText() );
+						{
+						    println( "// " +node.getText() );
+						}
 
                     retVal = node.eval( callstack, localInterpreter );
 
 					// sanity check during development
 					if ( callstack.depth() > 1 )
-						throw new InterpreterError(
+						{
+						    throw new InterpreterError(
 							"Callstack growing: "+callstack);
+						}
 
                     if ( retVal instanceof ReturnControl ) {
                         retVal = ((ReturnControl)retVal).value;
@@ -687,7 +703,9 @@ public class Interpreter
 									// e.printStackTrace(); // Do not print a stack trace here - Will be handled (if necessary) by Vassal at a higher level
 				// failsafe, set the Line as the origin of the error.
 				if ( e.getNode()==null )
-					e.setNode( node );
+					{
+					    e.setNode( node );
+					}
 				e.reThrow( "Sourced file: "+sourceFileInfo );
             } catch ( Exception e) {
                 if ( DEBUG)

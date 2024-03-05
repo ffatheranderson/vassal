@@ -106,12 +106,14 @@ public class ClassGeneratorImpl extends ClassGenerator
 		// if debug, write out the class file to debugClasses directory
 		String dir = System.getProperty("debugClasses");
 		if ( dir != null )
-		try {
+		{
+		    try {
 			FileOutputStream out= 
 				new FileOutputStream( dir+"/"+className+".class" );
 			out.write(code);
 			out.close();
 		} catch ( IOException e ) { }
+		}
 
 		// Define the new class in the classloader
 		Class genClass = bcm.defineClass( fqClassName, code );

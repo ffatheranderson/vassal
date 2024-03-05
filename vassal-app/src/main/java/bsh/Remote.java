@@ -177,7 +177,9 @@ public class Remote
 		  // read results...
 		  int rc = urlcon.getResponseCode();
 		  if ( rc != HttpURLConnection.HTTP_OK )
-			System.out.println("Error, HTTP response: "+rc );
+			{
+			    System.out.println("Error, HTTP response: "+rc );
+			}
 
 		  returnValue = urlcon.getHeaderField("Bsh-Return");
 
@@ -185,7 +187,9 @@ public class Remote
 			new InputStreamReader( urlcon.getInputStream() ) );
 		  String line;
 		  while ( (line=bin.readLine()) != null )
-			System.out.println( line );
+			{
+			    System.out.println( line );
+			}
 
 		  System.out.println( "Return Value: "+returnValue );
 

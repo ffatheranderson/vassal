@@ -83,7 +83,9 @@ public class StringUtil {
     {
         StringBuffer sb = new StringBuffer(name + "(");
         if ( types.length > 0 )
-			sb.append(" ");
+			{
+			    sb.append(" ");
+			}
         for( int i=0; i<types.length; i++ )
         {
             Class c = types[i];

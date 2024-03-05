@@ -149,7 +149,9 @@ class Reflect
         throws ReflectError, UtilTargetError
     {
 		if ( Interpreter.DEBUG ) 
-			Interpreter.debug("getIndex: "+array+", index="+index);
+			{
+			    Interpreter.debug("getIndex: "+array+", index="+index);
+			}
         try {
             Object val = Array.get(array, index);
             return Primitive.wrap( val, array.getClass().getComponentType() );
@@ -591,8 +593,10 @@ class Reflect
         throws ReflectError, InvocationTargetException
     {
 		if ( clas.isInterface() )
-			throw new ReflectError(
+			{
+			    throw new ReflectError(
 				"Can't create instance of an interface: "+clas);
+			}
 
         Object obj = null;
         Class[] types = Types.getTypes(args);
@@ -611,9 +615,11 @@ class Reflect
 			throw cantFindConstructor( clas, types );
 
 		if ( !isPublic( con ) )
-			try {
+			{
+			    try {
 				ReflectManager.RMSetAccessible( con );
 			} catch ( UtilEvalError e ) { /*ignore*/ }
+			}
 
         args=Primitive.unwrap( args );
         try {
@@ -802,8 +808,10 @@ class Reflect
 				e2 = e;
 			}
 		if ( method == null )
-			throw new ReflectError("Error in property getter: "
+			{
+			    throw new ReflectError("Error in property getter: "
 				+e1 + (e2!=null?" : "+e2:"") );
+			}
 
         try {
 			return invokeMethod( method, obj, args );

@@ -60,10 +60,12 @@ class BSHAssignment extends SimpleNode implements ParserConstants
 		// e.g. i=1; i+=i++; // should be 2 not 3
 		Object lhsValue = null;
 		if ( operator != ASSIGN ) // assign doesn't need the pre-value
-			try {
+			{
+			    try {
 				lhsValue = lhs.getValue();
 			} catch ( UtilEvalError e ) {
 				throw e.toEvalError( this, callstack );
+			}
 			}
 
         SimpleNode rhsNode = (SimpleNode)jjtGetChild(1);

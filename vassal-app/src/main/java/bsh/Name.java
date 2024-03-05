@@ -801,8 +801,10 @@ class Name implements java.io.Serializable
 		}
 
 		if ( !Name.isCompound(value) )
-			return invokeLocalMethod( 
+			{
+			    return invokeLocalMethod( 
 				interpreter, args, callstack, callerInfo );
+			}
 
 		// Note: if we want methods declared inside blocks to be accessible via
 		// this.methodname() inside the block we could handle it here as a
@@ -832,8 +834,10 @@ class Name implements java.io.Serializable
         Object obj = targetName.toObject( callstack, interpreter );
 
 		if ( obj == Primitive.VOID ) 
-			throw new UtilEvalError( "Attempt to resolve method: "+methodName
+			{
+			    throw new UtilEvalError( "Attempt to resolve method: "+methodName
 					+"() on undefined variable or class name: "+targetName);
+			}
 
         // if we've got an object, resolve the method
         if ( !(obj instanceof ClassIdentifier) ) {
@@ -945,9 +949,11 @@ class Name implements java.io.Serializable
 			}
 
 			if ( invokeMethod != null )
-				return invokeMethod.invoke( 
+				{
+				    return invokeMethod.invoke( 
 					new Object [] { commandName, args }, 
 					interpreter, callstack, callerInfo );
+				}
 
             throw new EvalError( "Command not found: " 
 				+StringUtil.methodString( commandName, argTypes ), 

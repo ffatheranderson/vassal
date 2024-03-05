@@ -144,7 +144,9 @@ class BSHType extends SimpleNode
     {
         // return cached type if available
 		if ( type != null )
-			return type;
+			{
+			    return type;
+			}
 
         //  first node will either be PrimitiveType or AmbiguousName
         SimpleNode node = getTypeNode();

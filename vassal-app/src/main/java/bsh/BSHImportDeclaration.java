@@ -47,10 +47,12 @@ class BSHImportDeclaration extends SimpleNode
 	{
 		NameSpace namespace = callstack.top();
 		if ( superImport )
-			try {
+			{
+			    try {
 				namespace.doSuperImport();
 			} catch ( UtilEvalError e ) {
 				throw e.toEvalError( this, callstack  );
+			}
 			}
 		else 
 		{

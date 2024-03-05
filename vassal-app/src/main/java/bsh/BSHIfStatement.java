@@ -63,8 +63,10 @@ class BSHIfStatement extends SimpleNode
         Object obj = condExp.eval(callstack, interpreter);
         if(obj instanceof Primitive) {
 			if ( obj == Primitive.VOID )
-				throw new EvalError("Condition evaluates to void type", 
+				{
+				    throw new EvalError("Condition evaluates to void type", 
 					condExp, callstack );
+				}
             obj = ((Primitive)obj).getValue();
 		}
 

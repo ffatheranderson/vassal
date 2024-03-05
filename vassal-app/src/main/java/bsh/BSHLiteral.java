@@ -44,7 +44,9 @@ class BSHLiteral extends SimpleNode
 		throws EvalError
     {
 		if ( value == null )
-			throw new InterpreterError("Null in bsh literal: "+value);
+			{
+			    throw new InterpreterError("Null in bsh literal: "+value);
+			}
 
         return value;
     }

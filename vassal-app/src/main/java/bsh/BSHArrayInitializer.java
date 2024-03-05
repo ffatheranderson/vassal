@@ -74,9 +74,11 @@ class BSHArrayInitializer extends SimpleNode
             Object currentInitializer;
 			if ( node instanceof BSHArrayInitializer ) {
 				if ( dimensions < 2 )
-					throw new EvalError(
+					{
+					    throw new EvalError(
 						"Invalid Location for Intializer, position: "+i, 
 						this, callstack );
+					}
             	currentInitializer = 
 					((BSHArrayInitializer)node).eval( 
 						baseType, dimensions-1, callstack, interpreter);

@@ -822,7 +822,9 @@ public final class Primitive implements ParserConstants, java.io.Serializable
 
 		// Promote character to Number type for these purposes
 		if (value instanceof Character)
-			value = Integer.valueOf(((Character)value).charValue());
+			{
+			    value = Integer.valueOf(((Character)value).charValue());
+			}
 
         if (value instanceof Number)
             return (Number)value;
