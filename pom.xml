@@ -49,6 +49,7 @@
 
         <!-- this is a default that will be overridden on the command line with -DgitVersion= -->
         <gitVersion>${project.version}</gitVersion>
+        <versions.java-security-toolkit>1.1.3</versions.java-security-toolkit>
     </properties>
 
     <repositories>
@@ -178,4 +179,13 @@
             </plugin>
         </plugins>
     </build>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.pixee</groupId>
+                <artifactId>java-security-toolkit</artifactId>
+                <version>${versions.java-security-toolkit}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

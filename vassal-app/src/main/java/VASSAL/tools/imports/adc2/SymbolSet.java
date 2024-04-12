@@ -18,6 +18,7 @@
 
 package VASSAL.tools.imports.adc2;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.awt.AlphaComposite;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -592,10 +593,10 @@ public class SymbolSet extends Importer {
         String line = null;
         try {
           for (int i = 0; i < mapBoardData.length; ++i) {
-            line = input.readLine();
+            line = BoundedLineReader.readLine(input, 5_000_000);
           }
           for (int i = 0; i < pieces.length; ++i) {
-            line = input.readLine();
+            line = BoundedLineReader.readLine(input, 5_000_000);
             final int idx = Integer.parseInt(line);
             pieces[i] = gamePieceData[idx - 1];
           }
