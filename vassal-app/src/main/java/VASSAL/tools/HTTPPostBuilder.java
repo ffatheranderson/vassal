@@ -17,6 +17,8 @@
  */
 package VASSAL.tools;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -165,7 +167,7 @@ public class HTTPPostBuilder {
    * @throws IOException in case of failure
    */
   public InputStream post(String url) throws IOException {
-    return post(new URL(url));
+    return post(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
   }
 
   /**

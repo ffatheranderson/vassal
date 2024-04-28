@@ -18,6 +18,8 @@
 
 package VASSAL.tools.image.svg;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.awt.AlphaComposite;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -171,7 +173,7 @@ public class SVGRenderer {
     @Override
     public Document loadDocument(String uri)
         throws MalformedURLException, IOException {
-      final String file = new File((new URL(uri)).getPath()).getName();
+      final String file = new File((Urls.create(uri, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS)).getPath()).getName();
       final DataArchive mda = GameModule.getGameModule().getDataArchive();
       try (InputStream inner = mda.getInputStream(file);
            BufferedInputStream in = new BufferedInputStream(inner)) {
