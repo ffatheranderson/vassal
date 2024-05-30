@@ -709,7 +709,7 @@ public class JConsole extends JScrollPane
 
     // property	change
     public void	propertyChange(PropertyChangeEvent event) {
-		if (event.getPropertyName().equals("lookAndFeel")) {
+		if ("lookAndFeel".equals(event.getPropertyName())) {
 			SwingUtilities.updateComponentTreeUI(menu);
 		}
     }
@@ -717,11 +717,11 @@ public class JConsole extends JScrollPane
     // handle cut, copy	and paste
     public void	actionPerformed(ActionEvent event) {
 		String cmd = event.getActionCommand();
-		if (cmd.equals(CUT)) {
+		if (CUT.equals(cmd)) {
 			text.cut();
-		} else if (cmd.equals(COPY)) {
+		} else if (COPY.equals(cmd)) {
 			text.copy();
-		} else if (cmd.equals(PASTE)) {
+		} else if (PASTE.equals(cmd)) {
 			text.paste();
 		}
     }

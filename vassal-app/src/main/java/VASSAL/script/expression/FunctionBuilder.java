@@ -137,7 +137,7 @@ public class FunctionBuilder extends JDialog {
   }
 
   protected String buildResult() {
-    if (function.equals("?")) {
+    if ("?".equals(function)) {
       return "((" + configs.get(0).getValueString() + ") ? " + getExpr(configs.get(1)) + " : " + getExpr(configs.get(2)) + ")";
     }
     else if (isStringFunction()) {

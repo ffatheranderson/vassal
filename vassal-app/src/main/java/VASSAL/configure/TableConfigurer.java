@@ -154,7 +154,7 @@ public class TableConfigurer extends Configurer implements ActionListener  {
   public void actionPerformed(ActionEvent e) {
     final String action = e.getActionCommand();
 
-    if (action.equals(ADD_ACTION)) {
+    if (ADD_ACTION.equals(action)) {
       Arrays
         .stream(columns)
         .forEach(Column::addRow);

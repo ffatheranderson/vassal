@@ -148,7 +148,7 @@ class BSHPrimarySuffix extends SimpleNode
 	{
 		try {
 			// .length on array
-			if ( field.equals("length") && obj.getClass().isArray() )
+			if ( "length".equals(field) && obj.getClass().isArray() )
 				if ( toLHS )
 					throw new EvalError(
 						"Can't assign array length", this, callstack );

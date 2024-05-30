@@ -378,7 +378,7 @@ class Name implements java.io.Serializable
 
 			// Class qualified 'this' reference from inner class.
 			// e.g. 'MyOuterClass.this'
-			if ( field.equals("this") )
+			if ( "this".equals(field) )
 			{
 				// find the enclosing class instance space of the class name
 				NameSpace ns = namespace;
@@ -439,7 +439,7 @@ class Name implements java.io.Serializable
 		String field = prefix(evalName, 1);
 
 		// length access on array? 
-		if ( field.equals("length") && evalBaseObject.getClass().isArray() )
+		if ( "length".equals(field) && evalBaseObject.getClass().isArray() )
 		{
 			Object obj = new Primitive(Array.getLength(evalBaseObject));
 			return completeRound( field, suffix(evalName), obj );
@@ -478,7 +478,7 @@ class Name implements java.io.Serializable
 		String varName, boolean specialFieldsVisible ) 
 		throws UtilEvalError
 	{
-		if ( varName.equals("this") ) 
+		if ( "this".equals(varName) ) 
 		{
 			/*
 				Somewhat of a hack.  If the special fields are visible (we're
@@ -513,7 +513,7 @@ class Name implements java.io.Serializable
 			If we're in an enclsing class instance and have a superclass
 			instance our super is the superclass instance.
 		*/
-		if ( varName.equals("super") ) 
+		if ( "super".equals(varName) ) 
 		{
 			//if ( specialFieldsVisible )
 			//throw new UtilEvalError("Redundant to call .this on This type");
@@ -538,28 +538,28 @@ class Name implements java.io.Serializable
 
 		Object obj = null;
 
-		if ( varName.equals("global") )
+		if ( "global".equals(varName) )
 			obj = thisNameSpace.getGlobal( interpreter );
 
 		if ( obj == null && specialFieldsVisible ) 
 		{
-			if (varName.equals("namespace"))
+			if ("namespace".equals(varName))
 				obj = thisNameSpace;
-			else if (varName.equals("variables"))
+			else if ("variables".equals(varName))
 				obj = thisNameSpace.getVariableNames();
-			else if (varName.equals("methods"))
+			else if ("methods".equals(varName))
 				obj = thisNameSpace.getMethodNames();
-			else if ( varName.equals("interpreter") )
-				if ( lastEvalName.equals("this") )
+			else if ( "interpreter".equals(varName) )
+				if ( "this".equals(lastEvalName) )
 					obj = interpreter;
 				else
 					throw new UtilEvalError(
 						"Can only call .interpreter on literal 'this'");
 		}
 
-		if ( obj == null && specialFieldsVisible && varName.equals("caller") )
+		if ( obj == null && specialFieldsVisible && "caller".equals(varName) )
 		{
-			if ( lastEvalName.equals("this") || lastEvalName.equals("caller") ) 
+			if ( "this".equals(lastEvalName) || "caller".equals(lastEvalName) ) 
 			{
 				// get the previous context (see notes for this class)
 				if ( callstack == null )
@@ -576,9 +576,9 @@ class Name implements java.io.Serializable
 		}
 
 		if ( obj == null && specialFieldsVisible 
-			&& varName.equals("callstack") )
+			&& "callstack".equals(varName) )
 		{
-			if ( lastEvalName.equals("this") ) 
+			if ( "this".equals(lastEvalName) ) 
 			{
 				// get the previous context (see notes for this class)
 				if ( callstack == null )
@@ -733,7 +733,7 @@ class Name implements java.io.Serializable
 				
 				In the old scoping rules super didn't do this.
 			*/
-			boolean localVar = !lastEvalName.equals("super");
+			boolean localVar = !"super".equals(lastEvalName);
 			return new LHS( ((This)obj).namespace, evalName, localVar );
 		}
 
@@ -813,7 +813,7 @@ class Name implements java.io.Serializable
         String prefix = Name.prefix(value);
 
 		// Superclass method invocation? (e.g. super.foo())
-		if ( prefix.equals("super") && Name.countParts(value) == 2 )
+		if ( "super".equals(prefix) && Name.countParts(value) == 2 )
 		{
 			// Allow getThis() to work through block namespaces first
 			This ths = namespace.getThis( interpreter );

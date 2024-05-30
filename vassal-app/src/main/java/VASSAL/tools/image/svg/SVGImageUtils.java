@@ -325,7 +325,7 @@ public class SVGImageUtils {
       final URL url = new URL(new URL(e.getBaseURI()),
                               XLinkSupport.getXLinkHref(e));
       // balk (for now) unless file is available on our filesystem
-      if (url.getProtocol().equals("file")) { //NON-NLS
+      if ("file".equals(url.getProtocol())) { //NON-NLS
         final String refpath = url.getPath();
         if (!known.contains(refpath)) {
           follow.add(refpath);

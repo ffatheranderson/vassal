@@ -921,7 +921,7 @@ System.out.println("experiment: creating class manager");
 				String path = (String)importedCommands.elementAt(i);
 
 				String scriptPath; 
-				if ( path.equals("/") )
+				if ( "/".equals(path) )
 					scriptPath = path + name +".bsh";
 				else
 					scriptPath = path +"/"+ name +".bsh";
@@ -936,7 +936,7 @@ System.out.println("experiment: creating class manager");
 
 				// Chop leading "/" and change "/" to "."
 				String className;
-				if ( path.equals("/") )
+				if ( "/".equals(path) )
 					className = name;
 				else
 					className = path.substring(1).replace('/','.') +"."+name;

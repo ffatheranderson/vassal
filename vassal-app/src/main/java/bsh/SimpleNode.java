@@ -210,10 +210,10 @@ class SimpleNode implements Node
 		Token t = firstToken;
 		while ( t!=null ) {
 			text.append(t.image);
-			if ( !t.image.equals(".") )
+			if ( !".".equals(t.image) )
 				text.append(" ");
 			if ( t==lastToken ||
-				t.image.equals("{") || t.image.equals(";") )
+				"{".equals(t.image) || ";".equals(t.image) )
 				break;
 			t=t.next;
 		}

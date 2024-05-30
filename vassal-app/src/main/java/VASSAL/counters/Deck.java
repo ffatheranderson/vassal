@@ -2007,7 +2007,7 @@ public class Deck extends Stack implements PlayerRoster.SideChangeListener {
   }
 
   private boolean shouldConfirmOverwrite() {
-    return System.getProperty("os.name").trim().equalsIgnoreCase("linux"); //$NON-NLS-1$ //$NON-NLS-2$
+    return "linux".equalsIgnoreCase(System.getProperty("os.name").trim()); //$NON-NLS-1$ //$NON-NLS-2$
   }
 
   private boolean saveDeck() {

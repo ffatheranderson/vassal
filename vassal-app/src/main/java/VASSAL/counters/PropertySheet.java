@@ -197,7 +197,7 @@ public class PropertySheet extends Decorator implements TranslatablePiece {
     final String launchKeyStrokeToken = st.nextToken("");
     description = st.nextToken("");
 
-    backgroundColor = red.equals("") ? null : new Color(atoi(red), atoi(green), atoi(blue));
+    backgroundColor = "".equals(red) ? null : new Color(atoi(red), atoi(green), atoi(blue));
     frame = null;
 
     // Handle conversion from old character only key
@@ -527,7 +527,7 @@ public class PropertySheet extends Decorator implements TranslatablePiece {
         }
         c.gridwidth = type == TEXT_AREA || type == LABEL_ONLY ? 2 : 1;
 
-        if (!name.equals("")) {
+        if (!"".equals(name)) {
           c.gridx = 0;
           c.weighty = 0.0;
           c.weightx = c.gridwidth == 2 ? 1.0 : 0.0;
@@ -953,7 +953,7 @@ public class PropertySheet extends Decorator implements TranslatablePiece {
     protected String[][] getTableData(String definition) {
       final SequenceEncoder.Decoder decoder = new SequenceEncoder.Decoder(definition, DEF_DELIMITOR);
 
-      int numRows = !definition.equals("") && decoder.hasMoreTokens() ? 1 : 0;
+      int numRows = !"".equals(definition) && decoder.hasMoreTokens() ? 1 : 0;
       for (int iDef = -1; (iDef = definition.indexOf(DEF_DELIMITOR, iDef + 1)) >= 0;) {
         ++numRows;
       }

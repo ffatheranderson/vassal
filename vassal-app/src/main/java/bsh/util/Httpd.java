@@ -106,7 +106,7 @@ class HttpdConnection extends Thread
 			if(request.toLowerCase().indexOf("http/1.") != -1)
 			{
 				String s;
-				while((!(s = in.readLine()).equals("")) && (s != null))
+				while((!"".equals((s = in.readLine()))) && (s != null))
 				{ ; }
 
 				isHttp1 = true;
@@ -118,7 +118,7 @@ class HttpdConnection extends Thread
 			else
 			{
 				String command = st.nextToken();
-				if(command.equals("GET"))
+				if("GET".equals(command))
 					serveFile(st.nextToken());
 				else
 					error(400, "Bad Request");
@@ -141,7 +141,7 @@ class HttpdConnection extends Thread
 		throws FileNotFoundException, IOException
 	{
 		// Do some mappings
-		if ( file.equals("/") )
+		if ( "/".equals(file) )
 			file = "/remote/remote.html";
 
 		if ( file.startsWith("/remote/") )

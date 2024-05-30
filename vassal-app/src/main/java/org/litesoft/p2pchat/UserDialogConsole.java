@@ -89,7 +89,7 @@ public class UserDialogConsole extends Thread implements UserDialog {
     if (pLine.length() == 0)
       return;
 
-    if (pLine.equalsIgnoreCase("WHO")) {
+    if ("WHO".equalsIgnoreCase(pLine)) {
       showWho();
       return;
     }

@@ -531,21 +531,21 @@ public class ClassGeneratorUtil implements Constants
 		{
 			String type = paramTypes[i];
 			String method = null;
-			if      ( type.equals("Z") )
+			if      ( "Z".equals(type) )
 				method = "getBoolean";
-			else if ( type.equals("B") )
+			else if ( "B".equals(type) )
 				method = "getByte";
-			else if ( type.equals("C") )
+			else if ( "C".equals(type) )
 				method = "getChar";
-			else if ( type.equals("S") )
+			else if ( "S".equals(type) )
 				method = "getShort";
-			else if ( type.equals("I") )
+			else if ( "I".equals(type) )
 				method = "getInt";
-			else if ( type.equals("J") )
+			else if ( "J".equals(type) )
 				method = "getLong";
-			else if ( type.equals("D") )
+			else if ( "D".equals(type) )
 				method = "getDouble";
-			else if ( type.equals("F") )
+			else if ( "F".equals(type) )
 				method = "getFloat";
 			else 
 				method = "getObject";
@@ -554,13 +554,13 @@ public class ClassGeneratorUtil implements Constants
 			cv.visitVarInsn( ALOAD, consArgsVar ); // push the ConstructorArgs
 			String className = "bsh/ClassGeneratorUtil$ConstructorArgs";
 			String retType;
-			if ( method.equals("getObject") )
+			if ( "getObject".equals(method) )
 				retType = OBJECT;
 			else
 				retType = type; 
 			cv.visitMethodInsn(INVOKEVIRTUAL, className, method, "()"+retType);
 			// if it's an object type we must do a check cast
-			if ( method.equals("getObject") )
+			if ( "getObject".equals(method) )
 				cv.visitTypeInsn( CHECKCAST, descriptorToClassName(type) ); 
 		}
 
@@ -611,7 +611,7 @@ public class ClassGeneratorUtil implements Constants
 			else
 				cv.visitVarInsn(ALOAD, localVarIndex);
 			localVarIndex += 
-				( (paramTypes[i].equals("D") || paramTypes[i].equals("J")) 
+				( ("D".equals(paramTypes[i]) || "J".equals(paramTypes[i])) 
 					? 2 : 1 );
 		}
 
@@ -660,17 +660,17 @@ public class ClassGeneratorUtil implements Constants
 	*/
 	static void generatePlainReturnCode( String returnType, CodeVisitor cv )
 	{
-		if ( returnType.equals("V") )
+		if ( "V".equals(returnType) )
 			cv.visitInsn( RETURN );
 		else 
 		if ( isPrimitive( returnType ) )
 		{
 			int opcode = IRETURN;
-			if ( returnType.equals("D") )
+			if ( "D".equals(returnType) )
 				opcode = DRETURN;
-			else if ( returnType.equals("F") )
+			else if ( "F".equals(returnType) )
 				opcode = FRETURN;
-			else if ( returnType.equals("J") )  //long
+			else if ( "J".equals(returnType) )  //long
 				opcode = LRETURN;
 
 			cv.visitInsn(opcode);
@@ -706,11 +706,11 @@ public class ClassGeneratorUtil implements Constants
 			if ( isPrimitive( param ) ) 
 			{
                 int opcode;
-                if (param.equals("F")) {
+                if ("F".equals(param)) {
                     opcode = FLOAD;
-                } else if (param.equals("D")) {
+                } else if ("D".equals(param)) {
                     opcode = DLOAD;
-                } else if (param.equals("J")) {
+                } else if ("J".equals(param)) {
                     opcode = LLOAD;
                 } else {
                     opcode = ILOAD;
@@ -733,7 +733,7 @@ public class ClassGeneratorUtil implements Constants
 			}
 			cv.visitInsn(AASTORE);
 			localVarIndex += 
-				( (param.equals("D") || param.equals("J")) ? 2 : 1 );
+				( ("D".equals(param) || "J".equals(param)) ? 2 : 1 );
 		}
   }
 
@@ -749,7 +749,7 @@ public class ClassGeneratorUtil implements Constants
 	public static void generateReturnCode (
 		String returnType, CodeVisitor cv ) 
 	{
-		if ( returnType.equals("V") ) 
+		if ( "V".equals(returnType) ) 
 		{
 			cv.visitInsn(POP);
 			cv.visitInsn(RETURN);
@@ -759,28 +759,28 @@ public class ClassGeneratorUtil implements Constants
 			int opcode = IRETURN;
 			String type;
 			String meth;
-			if ( returnType.equals("B") ) {
+			if ( "B".equals(returnType) ) {
 				type = "java/lang/Byte";
 				meth = "byteValue";
-		 	} else if (returnType.equals("I") ) {
+		 	} else if ("I".equals(returnType) ) {
 				type = "java/lang/Integer";
 				meth = "intValue";
-			} else if (returnType.equals("Z") ) {
+			} else if ("Z".equals(returnType) ) {
 				type = "java/lang/Boolean";
 				meth = "booleanValue";
-			} else if (returnType.equals("D") ) {
+			} else if ("D".equals(returnType) ) {
 				opcode = DRETURN;
 				type = "java/lang/Double";
 				meth = "doubleValue";
-		 	} else if (returnType.equals("F") ) {
+		 	} else if ("F".equals(returnType) ) {
 				opcode = FRETURN;
 				type = "java/lang/Float";
 				meth = "floatValue";
-			} else if (returnType.equals("J") ) {
+			} else if ("J".equals(returnType) ) {
 				opcode = LRETURN;
 				type = "java/lang/Long";
 				meth = "longValue";
-			} else if (returnType.equals("C") ) {
+			} else if ("C".equals(returnType) ) {
 				type = "java/lang/Character";
 				meth = "charValue";
 			} else /*if (returnType.equals("S") )*/ {
@@ -844,8 +844,8 @@ public class ClassGeneratorUtil implements Constants
 			BSHMethodInvocation methodNode = 
 				(BSHMethodInvocation)firstStatement;
 			BSHAmbiguousName methodName = methodNode.getNameNode();
-			if ( methodName.text.equals("super") 
-				|| methodName.text.equals("this") 
+			if ( "super".equals(methodName.text) 
+				|| "this".equals(methodName.text) 
 			) {
 				altConstructor = methodName.text;
 				argsNode = methodNode.getArgsNode();
@@ -896,7 +896,7 @@ public class ClassGeneratorUtil implements Constants
 		Constructor [] superCons = superClass.getDeclaredConstructors();
 
 		// find the matching super() constructor for the args
-		if ( altConstructor.equals("super") )
+		if ( "super".equals(altConstructor) )
 		{
 			int i = Reflect.findMostSpecificConstructorIndex( 
 				argTypes , superCons );

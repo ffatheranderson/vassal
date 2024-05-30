@@ -398,7 +398,7 @@ public class ADC2Module extends Importer {
     }
 
     public Piece(int position, String name, PieceClass cl, HideState hidden, int flags, int facing) {
-      if (name == null || name.equals(""))
+      if (name == null || "".equals(name))
         this.name = null;
       else
         this.name = name;
@@ -623,7 +623,7 @@ public class ADC2Module extends Importer {
         SequenceEncoder se = new SequenceEncoder('~');
         final SequenceEncoder state = new SequenceEncoder('~');
         for (int i = 0; i < pieceValues.length; ++i) {
-          if (pieceValues[i] != null && !pieceValues[i].equals("")) {
+          if (pieceValues[i] != null && !"".equals(pieceValues[i])) {
             se.append("0" + pieceValues[i]);
             final Object o = getValue(i);
             if (o instanceof String)
@@ -1114,7 +1114,7 @@ public class ADC2Module extends Importer {
       final SequenceEncoder type = new SequenceEncoder('~');
       final SequenceEncoder state = new SequenceEncoder('~');
       for (int i = 0; i < classValues.length; ++i) {
-        if (classValues[i] != null && !classValues[i].equals("")) {
+        if (classValues[i] != null && !"".equals(classValues[i])) {
           type.append("0" + classValues[i]);
           final Object o = getValue(i);
           if (o instanceof String)
@@ -2404,7 +2404,7 @@ public class ADC2Module extends Importer {
     // add game piece layers to map
     final LayeredPieceCollection layer = getLayeredPieceCollection();
     String order = layer.getAttributeValueString(LayeredPieceCollection.LAYER_ORDER);
-    if (order.equals("")) {
+    if ("".equals(order)) {
       order = "0,1";
     }
     else {

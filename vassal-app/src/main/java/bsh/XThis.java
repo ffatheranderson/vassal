@@ -163,7 +163,7 @@ public class XThis extends This
 				equalsMethod = namespace.getMethod( 
 					"equals", new Class [] { Object.class } );
 			} catch ( UtilEvalError e ) {/*leave null*/ }
-			if ( methodName.equals("equals" ) && equalsMethod == null ) {
+			if ( "equals".equals(methodName ) && equalsMethod == null ) {
 				Object obj = args[0];
 				return Boolean.valueOf( proxy == obj );
 			}
@@ -178,7 +178,7 @@ public class XThis extends This
 					namespace.getMethod( "toString", new Class [] { } );
 			} catch ( UtilEvalError e ) {/*leave null*/ }
 
-			if ( methodName.equals("toString" ) && toStringMethod == null)
+			if ( "toString".equals(methodName ) && toStringMethod == null)
 			{
 				Class [] ints = proxy.getClass().getInterfaces();
 				// XThis.this refers to the enclosing class instance

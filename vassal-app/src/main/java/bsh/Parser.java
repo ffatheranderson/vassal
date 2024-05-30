@@ -75,7 +75,7 @@ public class Parser/*@bgen(jjtree)*/implements ParserTreeConstants, ParserConsta
         {
                 boolean print = false;
                 int i=0;
-                if ( args[0].equals("-p") ) {
+                if ( "-p".equals(args[0]) ) {
                         i++;
                         print=true;
                 }

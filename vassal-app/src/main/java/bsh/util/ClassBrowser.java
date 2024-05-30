@@ -208,7 +208,7 @@ public class ClassBrowser extends JSplitPane
 
 		Class clas;
 		try {
-			if ( selectedPackage.equals("<unpackaged>") )
+			if ( "<unpackaged>".equals(selectedPackage) )
 				selectedClass = classManager.classForName( classname );
 			else
 				selectedClass = classManager.classForName( 
@@ -434,7 +434,7 @@ public class ClassBrowser extends JSplitPane
 			else
 			{
 				String fullClassName = 
-					selectedPackage.equals("<unpackaged>") ?  
+					"<unpackaged>".equals(selectedPackage) ?  
 						classname : selectedPackage+"."+classname;
 				methodLineString = 
 					fullClassName

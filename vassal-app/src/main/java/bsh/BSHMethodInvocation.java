@@ -61,7 +61,7 @@ class BSHMethodInvocation extends SimpleNode
 		// Do not evaluate methods this() or super() in class instance space
 		// (i.e. inside a constructor)
 		if ( namespace.getParent() != null && namespace.getParent().isClass
-			&& ( nameNode.text.equals("super") || nameNode.text.equals("this") )
+			&& ( "super".equals(nameNode.text) || "this".equals(nameNode.text) )
 		)
 			return Primitive.VOID;
  

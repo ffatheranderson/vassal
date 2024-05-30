@@ -264,15 +264,15 @@ public class This implements java.io.Serializable, Runnable
 			a default impl.
 		*/
 		// a default toString() that shows the interfaces we implement
-		if ( methodName.equals("toString" ) )
+		if ( "toString".equals(methodName ) )
 			return toString();
 
 		// a default hashCode()
-		if ( methodName.equals("hashCode" ) )
+		if ( "hashCode".equals(methodName ) )
 			return Integer.valueOf(this.hashCode());
 
 		// a default equals() testing for equality with the This reference
-		if ( methodName.equals("equals" ) ) {
+		if ( "equals".equals(methodName ) ) {
 			Object obj = args[0];
 			return Boolean.valueOf( this == obj );
 		}
@@ -327,13 +327,13 @@ public class This implements java.io.Serializable, Runnable
 	static boolean isExposedThisMethod( String name ) 
 	{
 		return 
-			name.equals("getClass") 
-			|| name.equals("invokeMethod")
-			|| name.equals("getInterface")
+			"getClass".equals(name) 
+			|| "invokeMethod".equals(name)
+			|| "getInterface".equals(name)
 			// These are necessary to let us test synchronization from scripts
-			|| name.equals("wait") 
-			|| name.equals("notify")
-			|| name.equals("notifyAll");
+			|| "wait".equals(name) 
+			|| "notify".equals(name)
+			|| "notifyAll".equals(name);
 	}
 
 }

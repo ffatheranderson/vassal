@@ -898,29 +898,29 @@ public class SendToLocation extends Decorator implements TranslatablePiece {
 
       final String destOption = newDestInput.getValueString();
 
-      xInput.getControls().setVisible(destOption.equals(DEST_LOCATION));
-      xInputLabel.setVisible(destOption.equals(DEST_LOCATION));
-      yInput.getControls().setVisible(destOption.equals(DEST_LOCATION));
-      yInputLabel.setVisible(destOption.equals(DEST_LOCATION));
+      xInput.getControls().setVisible(DEST_LOCATION.equals(destOption));
+      xInputLabel.setVisible(DEST_LOCATION.equals(destOption));
+      yInput.getControls().setVisible(DEST_LOCATION.equals(destOption));
+      yInputLabel.setVisible(DEST_LOCATION.equals(destOption));
 
-      final boolean destCounter = (destOption.equals(DEST_COUNTER) || destOption.equals(DEST_COUNTER_CYCLE) || destOption.equals(DEST_COUNTER_NEAREST));
+      final boolean destCounter = (DEST_COUNTER.equals(destOption) || DEST_COUNTER_CYCLE.equals(destOption) || DEST_COUNTER_NEAREST.equals(destOption));
       mapControls.setVisible(!destCounter);
       mapLabel.setVisible(!destCounter);
 
-      boardControls.setVisible(destOption.equals(DEST_LOCATION) || destOption.equals(DEST_GRIDLOCATION));
-      boardLabel.setVisible(destOption.equals(DEST_LOCATION) || destOption.equals(DEST_GRIDLOCATION));
+      boardControls.setVisible(DEST_LOCATION.equals(destOption) || DEST_GRIDLOCATION.equals(destOption));
+      boardLabel.setVisible(DEST_LOCATION.equals(destOption) || DEST_GRIDLOCATION.equals(destOption));
 
-      zoneInput.getControls().setVisible(destOption.equals(DEST_ZONE));
-      zoneLabel.setVisible(destOption.equals(DEST_ZONE));
+      zoneInput.getControls().setVisible(DEST_ZONE.equals(destOption));
+      zoneLabel.setVisible(DEST_ZONE.equals(destOption));
 
-      regionInput.getControls().setVisible(destOption.equals(DEST_REGION));
-      regionLabel.setVisible(destOption.equals(DEST_REGION));
+      regionInput.getControls().setVisible(DEST_REGION.equals(destOption));
+      regionLabel.setVisible(DEST_REGION.equals(destOption));
 
       propertyInput.getControls().setVisible(destCounter);
       propertyLabel.setVisible(destCounter);
 
-      gridLocationInput.getControls().setVisible(destOption.equals(DEST_GRIDLOCATION));
-      gridLabel.setVisible(destOption.equals(DEST_GRIDLOCATION));
+      gridLocationInput.getControls().setVisible(DEST_GRIDLOCATION.equals(destOption));
+      gridLabel.setVisible(DEST_GRIDLOCATION.equals(destOption));
 
       repack(controls);
     }

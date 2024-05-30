@@ -114,7 +114,7 @@ public abstract class Importer {
    * Return a file name without the extension.
    */
   public static String stripExtension(String s) {
-    if (s.equals(".") || s.equals(".."))
+    if (".".equals(s) || "..".equals(s))
       return s;
     final int index = s.lastIndexOf('.');
     final int pathIdx = s.lastIndexOf(File.separatorChar);
@@ -204,7 +204,7 @@ public abstract class Importer {
    * Get the file name without the qualifying path.
    */
   public static String getFileName(String s) {
-    if (s.equals(".") || s.equals(".."))
+    if (".".equals(s) || "..".equals(s))
       return s;
     final int pathIdx = s.lastIndexOf(File.separatorChar);
     return s.substring(pathIdx + 1);
@@ -214,7 +214,7 @@ public abstract class Importer {
    * Get the extension from a file name.
    */
   public static String getExtension(String s) {
-    if (s.equals(".") || s.equals(".."))
+    if (".".equals(s) || "..".equals(s))
       return "";
     final int extIdx = s.lastIndexOf('.');
     final int pathIdx = s.lastIndexOf(File.separatorChar);
@@ -228,7 +228,7 @@ public abstract class Importer {
    * Strip the extension from a filename and replace with the given extension.
    */
   public static String forceExtension(String s, String ext) {
-    if (s.equals(".") || s.equals(".."))
+    if (".".equals(s) || "..".equals(s))
       return s;
     return Importer.stripExtension(s) + '.' + ext;
   }

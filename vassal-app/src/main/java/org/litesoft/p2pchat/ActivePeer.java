@@ -115,7 +115,7 @@ public class ActivePeer extends Thread {
 
     for (String line; null != (line = zReader.readLine());) {
       processCommand(line);
-      if (line.equals(DONE)) {
+      if (DONE.equals(line)) {
         break;
       }
     }

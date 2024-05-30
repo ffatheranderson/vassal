@@ -128,7 +128,7 @@ public class MapBoard extends Importer {
         // create layer
         final LayeredPieceCollection l = getLayeredPieceCollection();
         String order = l.getAttributeValueString(LayeredPieceCollection.LAYER_ORDER);
-        if (order.equals("")) {
+        if ("".equals(order)) {
           order = getName();
         }
         else {
@@ -162,7 +162,7 @@ public class MapBoard extends Importer {
           // one toolbar menu to control all mapboard elements.
           final ToolbarMenu menu = getToolbarMenu();
           String entries = menu.getAttributeValueString(ToolbarMenu.MENU_ITEMS);
-          if (entries.equals("")) {
+          if ("".equals(entries)) {
             entries = getName();
           }
           else {

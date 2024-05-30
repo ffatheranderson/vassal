@@ -103,7 +103,7 @@ public class PeerReader extends Thread {
     try {
       while (null != (line = zReader.readLine())) {
         add(line);
-        if (line.equals("BYE")) {
+        if ("BYE".equals(line)) {
           break;
         }
       }
