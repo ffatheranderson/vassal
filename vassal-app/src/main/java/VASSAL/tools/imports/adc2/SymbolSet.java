@@ -496,7 +496,9 @@ public class SymbolSet extends Importer {
       // two-byte words.
       header = in.readUnsignedByte();
       if (header < 0xFA)
-        throw new FileFormatException("Invalid Symbol Set Header");
+        {
+            throw new FileFormatException("Invalid Symbol Set Header");
+        }
 
       // comletely overridden by the map file
       /* int orientation = */ in.readByte(); // 1=vertical; 2=horizontal; 3=grid
