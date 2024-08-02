@@ -1,5 +1,6 @@
 package org.litesoft.p2pchat;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -101,7 +102,7 @@ public class PeerReader extends Thread {
   public void run() {
     String line;
     try {
-      while (null != (line = zReader.readLine())) {
+      while (null != (line = BoundedLineReader.readLine(zReader, 5_000_000))) {
         add(line);
         if (line.equals("BYE")) {
           break;

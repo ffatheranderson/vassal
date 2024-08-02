@@ -18,6 +18,7 @@
 
 package VASSAL.tools.imports.adc2;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -2379,7 +2380,7 @@ public class ADC2Module extends Importer {
             try (BufferedReader input = Files.newBufferedReader(f.toPath(), StandardCharsets.US_ASCII)) {
               String line;
               do {
-                line = input.readLine();
+                line = BoundedLineReader.readLine(input, 5_000_000);
                 if (StringUtils.isNotEmpty(line)) {
                   line = line
                     .replaceAll(" (?: )", "&nbsp;")

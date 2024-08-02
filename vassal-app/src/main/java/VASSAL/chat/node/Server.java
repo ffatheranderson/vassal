@@ -16,6 +16,7 @@
  */
 package VASSAL.chat.node;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -92,7 +93,7 @@ public class Server extends Thread {
         new BufferedReader(new InputStreamReader(System.in, Charset.defaultCharset()));
       try {
         String line;
-        while ((line = reader.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
           if (line.startsWith("JOIN")) { //$NON-NLS-1$
             final String room = line.substring("JOIN".length()).trim(); //$NON-NLS-1$
             handler.writeLine(Protocol.encodeJoinCommand("test/" + room)); //$NON-NLS-1$

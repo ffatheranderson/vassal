@@ -33,6 +33,7 @@
 
 package bsh;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.*;
 import java.net.*;
 import java.text.*;
@@ -116,7 +117,7 @@ public class Remote
 			BufferedReader bin = new BufferedReader( 
 				new InputStreamReader(in));
 			  String line;
-			  while ( (line=bin.readLine()) != null )
+			  while ( (line=BoundedLineReader.readLine(bin, 5_000_000)) != null )
 				System.out.println( line );
 
 			// Need to scrape a value from the last line?
@@ -184,7 +185,7 @@ public class Remote
 		  BufferedReader bin = new BufferedReader(
 			new InputStreamReader( urlcon.getInputStream() ) );
 		  String line;
-		  while ( (line=bin.readLine()) != null )
+		  while ( (line=BoundedLineReader.readLine(bin, 5_000_000)) != null )
 			System.out.println( line );
 
 		  System.out.println( "Return Value: "+returnValue );
@@ -207,7 +208,7 @@ public class Remote
 		StringBuffer sb = new StringBuffer();
 		BufferedReader bin = new BufferedReader( new FileReader( name ) );
 		String line;
-		while ( (line=bin.readLine()) != null )
+		while ( (line=BoundedLineReader.readLine(bin, 5_000_000)) != null )
 			sb.append( line ).append( "\n" );
 		return sb.toString();
 	}
