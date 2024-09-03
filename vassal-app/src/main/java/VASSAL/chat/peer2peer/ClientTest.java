@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -15,7 +16,7 @@ import VASSAL.chat.WelcomeMessageServer;
 
 // TODO: throw this away or make it a JUnit test
 public class ClientTest extends P2PClient implements Runnable, PropertyChangeListener {
-  private static Random rng = new Random();
+  private static Random rng = new SecureRandom();
   private final int changeRoom;
   private final int numRooms;
   private final FileWriter log;
