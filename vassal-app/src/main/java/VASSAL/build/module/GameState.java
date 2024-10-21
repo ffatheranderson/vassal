@@ -52,6 +52,7 @@ import VASSAL.tools.io.ZipWriter;
 import VASSAL.tools.menu.MenuManager;
 import VASSAL.tools.swing.Dialogs;
 import VASSAL.tools.version.VersionUtils;
+import io.github.pixee.security.ZipSecurity;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
@@ -1577,7 +1578,7 @@ public class GameState implements CommandEncoder {
   }
 
   public Command decodeSavedGame(InputStream in) throws IOException {
-    try (ZipInputStream zipInput = new ZipInputStream(in)) {
+    try (ZipInputStream zipInput = ZipSecurity.createHardenedInputStream(in)) {
       for (ZipEntry entry = zipInput.getNextEntry(); entry != null;
            entry = zipInput.getNextEntry()) {
         if (SAVEFILE_ZIP_ENTRY.equals(entry.getName())) {

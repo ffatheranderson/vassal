@@ -41,6 +41,7 @@ import VASSAL.tools.ErrorDialog;
 import VASSAL.tools.WriteErrorDialog;
 import VASSAL.tools.menu.MenuItemProxy;
 import VASSAL.tools.menu.MenuManager;
+import io.github.pixee.security.ZipSecurity;
 
 import org.apache.commons.io.file.PathUtils;
 import org.slf4j.Logger;
@@ -125,7 +126,7 @@ public class BrowserHelpFile extends AbstractBuildable implements Configurable {
   /** Extract the HTML from the module, or create an External URL from the Starting page if there is none */
   protected void extractContents() {
     try (ZipInputStream in =
-           new ZipInputStream(new BufferedInputStream(
+           ZipSecurity.createHardenedInputStream(new BufferedInputStream(
              GameModule.getGameModule().getDataArchive().getInputStream(
                "help/" + getContentsResource())))) { //$NON-NLS-1$
 
