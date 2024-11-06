@@ -18,6 +18,7 @@
 
 package VASSAL.build.module.dice;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -117,7 +118,7 @@ public class BonesDiceServer extends DieServer {
       new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
 
       String line;
-      while ((line = in.readLine()) != null)
+      while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null)
         returnString.add(line);
     }
 

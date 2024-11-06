@@ -18,6 +18,7 @@
 
 package VASSAL.tools.lang;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class MemoryUtilsTest {
     final BufferedReader r =
       new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-    final int eRAM = Integer.parseInt(r.readLine());
+    final int eRAM = Integer.parseInt(BoundedLineReader.readLine(r, 5_000_000));
     r.close();
 
     // check that it's correct

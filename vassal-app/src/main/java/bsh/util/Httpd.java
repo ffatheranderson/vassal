@@ -33,6 +33,7 @@
 
 package bsh.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.*;
 import java.util.StringTokenizer;
 import java.net.Socket;
@@ -99,14 +100,14 @@ class HttpdConnection extends Thread
 			out = client.getOutputStream();
 			pout = new PrintStream(out);
 
-			String request = in.readLine();
+			String request = BoundedLineReader.readLine(in, 5_000_000);
 			if ( request == null )
 				error(400, "Empty Request");
 
 			if(request.toLowerCase().indexOf("http/1.") != -1)
 			{
 				String s;
-				while((!(s = in.readLine()).equals("")) && (s != null))
+				while((!(s = BoundedLineReader.readLine(in, 5_000_000)).equals("")) && (s != null))
 				{ ; }
 
 				isHttp1 = true;
