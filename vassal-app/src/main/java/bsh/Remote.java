@@ -33,6 +33,8 @@
 
 package bsh;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.*;
 import java.net.*;
 import java.text.*;
@@ -161,7 +163,7 @@ public class Remote
 		String formData = sb.toString(  );
 
 		try {
-		  URL url = new URL( postURL );
+		  URL url = Urls.create(postURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 		  HttpURLConnection urlcon =
 			  (HttpURLConnection) url.openConnection(  );
 		  urlcon.setRequestMethod("POST");
