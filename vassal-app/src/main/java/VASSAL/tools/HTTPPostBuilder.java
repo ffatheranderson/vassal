@@ -28,6 +28,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -50,7 +51,7 @@ public class HTTPPostBuilder {
 
   private static final String endl = "\r\n";
 
-  private static final Random rng = new Random();
+  private static final Random rng = new SecureRandom();
 
   private static String randomString() {
     return Long.toString(rng.nextLong(), Character.MAX_RADIX);
