@@ -2373,7 +2373,9 @@ public class MapBoard extends Importer {
       symbolIndex = ADC2Utils.readBase250Word(in);
       symbol = getSet().getMapBoardSymbol(symbolIndex);
       if (symbol != null)
-        secondaryMapBoardSymbols.add(new HexData(i, symbol));
+        {
+            secondaryMapBoardSymbols.add(new HexData(i, symbol));
+        }
 
       /* int elevation = */ ADC2Utils.readBase250Word(in);
 
