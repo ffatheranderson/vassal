@@ -17,6 +17,7 @@
 
 package VASSAL.tools.deprecation;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -140,7 +141,7 @@ public class Processor {
     try (InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8)) {
       try (BufferedReader br = new BufferedReader(isr)) {
         String line;
-        while ((line = br.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
           if (!line.isEmpty()) {
             callback.accept(line.split("\t"));
           }
