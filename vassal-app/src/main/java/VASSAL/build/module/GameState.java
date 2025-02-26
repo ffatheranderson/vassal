@@ -52,6 +52,8 @@ import VASSAL.tools.io.ZipWriter;
 import VASSAL.tools.menu.MenuManager;
 import VASSAL.tools.swing.Dialogs;
 import VASSAL.tools.version.VersionUtils;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
@@ -917,7 +919,7 @@ public class GameState implements CommandEncoder {
       if (flavor.isFlavorTextType()) {
         try {
           final String text = transferable.getTransferData(flavor).toString();
-          final URL url = new URL(text);
+          final URL url = Urls.create(text, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
           final URLConnection uc = url.openConnection();
 
           if (maybeSaveGame() != JOptionPane.CANCEL_OPTION) {
