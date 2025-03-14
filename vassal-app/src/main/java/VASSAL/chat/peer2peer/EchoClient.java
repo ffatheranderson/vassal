@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -19,7 +20,7 @@ import VASSAL.command.Command;
 // TODO: throw this away or make it a JUnit test
 public class EchoClient implements Runnable, PropertyChangeListener {
   public static final String NAME = "EchoBot"; //$NON-NLS-1$
-  private static final Random rng = new Random();
+  private static final Random rng = new SecureRandom();
   private final int changeRoom;
   private final int numRooms;
   private final FileWriter log;
