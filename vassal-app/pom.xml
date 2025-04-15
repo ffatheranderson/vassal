@@ -213,6 +213,10 @@
             <version>4.8.1</version>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>io.github.pixee</groupId>
+            <artifactId>java-security-toolkit</artifactId>
+        </dependency>
     </dependencies>
 
     <repositories>
