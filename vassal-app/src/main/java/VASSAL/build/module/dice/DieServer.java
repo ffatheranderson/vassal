@@ -7,6 +7,7 @@ import VASSAL.build.module.InternetDiceButton;
 import VASSAL.script.expression.Auditable;
 import VASSAL.tools.ErrorDialog;
 import VASSAL.tools.FormattedString;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -241,7 +242,7 @@ public abstract class DieServer implements Auditable {
          InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
          BufferedReader in = new BufferedReader(isr)) {
       String inputLine;
-      while ((inputLine = in.readLine()) != null) {
+      while ((inputLine = BoundedLineReader.readLine(in, 5_000_000)) != null) {
         returnString.add(inputLine);
       }
     }

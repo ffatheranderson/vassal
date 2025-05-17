@@ -1,5 +1,6 @@
 package org.litesoft.p2pchat;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.*;
 
 // Copyright Status:
@@ -75,7 +76,7 @@ public class UserDialogConsole extends Thread implements UserDialog {
 
     try {
       while (true)
-        processCommand(zReader.readLine());
+        processCommand(BoundedLineReader.readLine(zReader, 5_000_000));
     }
     catch (IOException e) {
       e.printStackTrace();

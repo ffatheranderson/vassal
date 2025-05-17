@@ -18,6 +18,7 @@
 
 package VASSAL.tools.io;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -29,8 +30,8 @@ public class ProcessCallableTestEchoer {
     final BufferedReader r =
       new BufferedReader(new InputStreamReader(System.in));
 
-    System.out.println(r.readLine());
-    System.err.println(r.readLine());
-    System.exit(Integer.parseInt(r.readLine()));
+    System.out.println(BoundedLineReader.readLine(r, 5_000_000));
+    System.err.println(BoundedLineReader.readLine(r, 5_000_000));
+    System.exit(Integer.parseInt(BoundedLineReader.readLine(r, 5_000_000)));
   }
 }

@@ -17,6 +17,7 @@
  */
 package VASSAL.build.module.metadata;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
@@ -91,7 +92,7 @@ public class MetaDataFactory {
            InputStreamReader isr = new InputStreamReader(zin, StandardCharsets.UTF_8);
            BufferedReader br = new BufferedReader(isr)) {
         for (int i = 0; i < 10; i++) {
-          final String s = br.readLine();
+          final String s = BoundedLineReader.readLine(br, 5_000_000);
           if (s.indexOf(BUILDFILE_MODULE_ELEMENT1) > 0
               || s.indexOf(BUILDFILE_MODULE_ELEMENT2) > 0) {
             return new ModuleMetaData(zip);
