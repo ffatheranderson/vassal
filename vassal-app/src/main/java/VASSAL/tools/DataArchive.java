@@ -16,6 +16,8 @@
  */
 package VASSAL.tools;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.Closeable;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -233,7 +235,7 @@ public class DataArchive extends SecureClassLoader implements Closeable {
     }
 
     if (archive.contains(fileName)) {
-      return new URL(getURL(), fileName);
+      return Urls.create(getURL(), fileName, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
     }
 
     for (final DataArchive ext : extensions) {

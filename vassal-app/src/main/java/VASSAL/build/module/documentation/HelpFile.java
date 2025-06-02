@@ -32,6 +32,8 @@ import VASSAL.tools.ReadErrorDialog;
 import VASSAL.tools.URLUtils;
 import VASSAL.tools.menu.MenuItemProxy;
 import VASSAL.tools.menu.MenuManager;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -91,7 +93,7 @@ public class HelpFile extends AbstractConfigurable {
 
   public HelpFile(String title, File contents, String ref)
                                 throws MalformedURLException {
-    this(title, new URL(URLUtils.toURL(contents), ref));
+    this(title, Urls.create(URLUtils.toURL(contents), ref, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
   }
 
   public HelpFile(String title, File contents) throws MalformedURLException {

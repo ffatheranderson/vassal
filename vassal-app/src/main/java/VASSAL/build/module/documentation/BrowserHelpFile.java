@@ -41,6 +41,8 @@ import VASSAL.tools.ErrorDialog;
 import VASSAL.tools.WriteErrorDialog;
 import VASSAL.tools.menu.MenuItemProxy;
 import VASSAL.tools.menu.MenuManager;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import org.apache.commons.io.file.PathUtils;
 import org.slf4j.Logger;
@@ -144,7 +146,7 @@ public class BrowserHelpFile extends AbstractBuildable implements Configurable {
   /** No HTML found in the module, generate an External URL from the starting page */
   private void setFallbackUrl() {
     try {
-      url = new URL(evaluateStartingPage());
+      url = Urls.create(evaluateStartingPage(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
     }
     catch (MalformedURLException e) {
       logger.error("Malformed URL: {}", startingPage, e); //NON-NLS
@@ -184,7 +186,7 @@ public class BrowserHelpFile extends AbstractBuildable implements Configurable {
   protected URL regenerateUrl() {
     if (externalTempFile == null) {
       try {
-        return new URL(evaluateStartingPage());
+        return Urls.create(evaluateStartingPage(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
       }
       catch (MalformedURLException e) {
         logger.error("Malformed URL: {}", startingPage, e); //NON-NLS

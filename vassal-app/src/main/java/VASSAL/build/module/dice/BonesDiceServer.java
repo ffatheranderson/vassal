@@ -18,6 +18,8 @@
 
 package VASSAL.build.module.dice;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -107,7 +109,7 @@ public class BonesDiceServer extends DieServer {
     final String[] rollString = buildInternetRollString(toss);
     final Vector<String> returnString = new Vector<>();
 
-    final URL url = new URL(rollString[0]);
+    final URL url = Urls.create(rollString[0], Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
     final HttpURLConnection connection =
       (HttpURLConnection) url.openConnection();
     connection.setRequestMethod("GET"); //NON-NLS

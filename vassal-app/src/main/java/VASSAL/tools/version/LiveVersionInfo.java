@@ -16,6 +16,8 @@
  */
 package VASSAL.tools.version;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.InputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -49,7 +51,7 @@ public class LiveVersionInfo implements VersionInfo {
   }
 
   private String getVersion(String url) throws IOException {
-    try (InputStream in = new URL(url).openStream()) {
+    try (InputStream in = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream()) {
       return IOUtils.toString(in, StandardCharsets.UTF_8).trim();
     }
   }

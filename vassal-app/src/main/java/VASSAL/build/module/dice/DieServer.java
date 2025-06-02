@@ -7,6 +7,8 @@ import VASSAL.build.module.InternetDiceButton;
 import VASSAL.script.expression.Auditable;
 import VASSAL.tools.ErrorDialog;
 import VASSAL.tools.FormattedString;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -225,7 +227,7 @@ public abstract class DieServer implements Auditable {
     //                    + "&number4=0&type4=2&number5=0&type5=2&number6=0&type6=2&number7=0&type7=2"
     //                    + "&number8=0&type8=2&number9=0&type9=2&number10=0&type10=2"
     //                    + "&emails=&email=b.easton@uws.edu.au&password=IG42506&Submit=Throw+Dice";
-    final URL url = new URL(serverURL);
+    final URL url = Urls.create(serverURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 
     final URLConnection connection = url.openConnection();
     connection.setDoOutput(true);
