@@ -25,6 +25,7 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -36,7 +37,7 @@ import java.util.Random;
  */
 public class ObfuscatingOutputStream extends FilterOutputStream {
   public static final String HEADER = "!VCSK"; //NON-NLS
-  private static final Random rand = new Random();
+  private static final Random rand = new SecureRandom();
 
   private final byte key;
   private final byte[] pair = new byte[2];
