@@ -17,6 +17,7 @@
  */
 package VASSAL.chat;
 
+import io.github.pixee.security.ZipSecurity;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class Compressor {
   }
 
   public static byte[] decompress(byte[] in) throws IOException {
-    try (ZipInputStream zipIn = new ZipInputStream(new ByteArrayInputStream(in))) {
+    try (ZipInputStream zipIn = ZipSecurity.createHardenedInputStream(new ByteArrayInputStream(in))) {
       zipIn.getNextEntry();
       return zipIn.readAllBytes();
     }
