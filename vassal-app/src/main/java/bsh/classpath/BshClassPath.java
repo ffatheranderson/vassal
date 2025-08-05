@@ -33,6 +33,7 @@
 
 package bsh.classpath;
 
+import io.github.pixee.security.ZipSecurity;
 import java.util.*;
 import java.util.zip.*;
 import java.io.*;
@@ -492,7 +493,7 @@ public class BshClassPath
 	{
 		Vector v = new Vector();
 		InputStream in = jar.openStream(); 
-		ZipInputStream zin = new ZipInputStream(in);
+		ZipInputStream zin = ZipSecurity.createHardenedInputStream(in);
 
 		ZipEntry ze;
 		while( (ze= zin.getNextEntry()) != null ) {

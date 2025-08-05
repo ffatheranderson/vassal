@@ -16,6 +16,7 @@
  */
 package VASSAL.tools.io;
 
+import io.github.pixee.security.ZipSecurity;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -538,7 +539,7 @@ public class ZipArchive implements FileArchive {
     // copy unmodified entries into the archive
     try (InputStream fin = Files.newInputStream(oldArchive);
          InputStream bin = new BufferedInputStream(fin);
-         ZipInputStream in = new ZipInputStream(bin)) {
+         ZipInputStream in = ZipSecurity.createHardenedInputStream(bin)) {
       final byte[] buf = new byte[8192];
 
       ZipEntry ze = null;
